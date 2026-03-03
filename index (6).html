@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAULTAMAX – premium gadgets & accessories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ----- all your existing styles (unchanged) ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #b4cc3d;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        header {
+            background: #000;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #A3F500;
+            flex-wrap: wrap;
+            z-index: 10;
+        }
+        header h1 {
+            color: #68AB10;
+            font-size: 70px;
+            letter-spacing: 2px;
+            animation: glow 0.5s infinite alternate;
+        }
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #00F51C, 0 0 10px #00F557; }
+            50% { text-shadow: 0 0 10px #00F592, 0 0 20px #2C8723, 0 0 30px #00F5D1; }
+            100% { text-shadow: 0 0 5px #00F56F, 0 0 10px #1FBD63; }
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        nav a {
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px 16px;
+            color: #fff;
+            text-decoration: none;
+            transition: 0.3s;
+            border-radius: 30px;
+        }
+        nav a:hover {
+            color: #3F11C6;
+            background: rgba(255,255,255,0.1);
+        }
+        .cart-icon {
+            position: relative;
+            margin-left: 15px;
+            cursor: pointer;
+            font-size: 28px;
+            color: gold;
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .cart-dropdown {
+            display: none;
+            position: absolute;
+            top: 80px;
+            right: 5%;
+            background: #1a1a1a;
+            border: 2px solid gold;
+            border-radius: 20px;
+            padding: 20px;
+            width: 320px;
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 999;
+            box-shadow: 0 10px 30px black;
+        }
+        .cart-dropdown.show {
+            display: block;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #333;
+            padding: 10px 0;
+        }
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .cart-item-info {
+            flex: 1;
+        }
+        .cart-item-title {
+            font-weight: 600;
+        }
+        .cart-item-price {
+            color: gold;
+        }
+        .cart-empty {
+            text-align: center;
+            color: #aaa;
+            padding: 20px;
+        }
+        .cart-total {
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: right;
+            color: gold;
+        }
+        /* WhatsApp order button inside cart */
+        .whatsapp-order-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 40px;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .whatsapp-order-btn:hover {
+            background: #128C7E;
+            transform: scale(1.02);
+        }
+        .hero {
+            width: 100%;
+            min-height: 60vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            animation: rotateBg 20s infinite alternate;
+            background-size: cover !important;
+            background-position: center !important;
+        }
+        @keyframes rotateBg {
+            0% { background-image: url('/img/background.png'); }
+            25% { background-image: url('https://images.unsplash.com/photo-1600086827875-a63b01f1335c?w=1200'); }
+            50% { background-image: url('/img/file.png'); }
+            75% { background-image: url('/img/applwatc.png'); }
+            100% { background-image: url('/img/lptp.jpg'); }
+        }
+        .hero h2 {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 40px;
+            color: #fff;
+            max-width: 900px;
+            backdrop-filter: blur(3px);
+            border: 1px solid gold;
+        }
+        #switch-text {
+            opacity: 1;
+            transition: opacity 0.8s ease-in-out;
+            color: gold;
+        }
+        .section {
+            padding: 80px 5%;
+        }
+        .section h3 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+            color: #8D81BA;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 40px;
+        }
+        .product-card {
+            background: #000;
+            padding: 25px 20px;
+            border-radius: 40px;
+            text-align: center;
+            transition: 0.3s;
+            color: white;
+            border: 1px solid #333;
+        }
+        .product-card:hover {
+            transform: translateY(-18px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+            border-color: gold;
+        }
+        .product-card img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .product-card h4 {
+            font-size: 22px;
+            margin: 10px 0 5px;
+        }
+        .product-card p {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+        .product-price {
+            font-size: 1.5rem;
+            color: gold;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        .rating {
+            color: #FFD700;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            margin: 8px 0;
+        }
+        .btn, .view-btn {
+            display: inline-block;
+            margin: 8px 5px;
+            padding: 10px 22px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn {
+            background: #f5c400;
+            color: #000;
+            animation: colorSwitch 3s infinite alternate;
+        }
+        @keyframes colorSwitch {
+            0% { background-color: #f5c400; color: #000; }
+            25% { background-color: #ff5733; color: #fff; }
+            50% { background-color: #33c1ff; color: #000; }
+            75% { background-color: #ff33a8; color: #fff; }
+            100% { background-color: #f5c400; color: #000; }
+        }
+        .btn:hover, .view-btn:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+        .view-btn {
+            background: black;
+            color: white;
+            border: 1px solid gold;
+        }
+        .view-btn:hover {
+            background: gold;
+            color: black;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        .gallery img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 3px solid #000;
+            transition: 0.3s;
+        }
+        .gallery img:hover {
+            transform: scale(1.02);
+            border-color: gold;
+        }
+        .social {
+            text-align: center;
+            padding: 60px 5%;
+            background: #000;
+        }
+        .social h3 {
+            margin-bottom: 30px;
+            color: #2EF500;
+            font-size: 32px;
+        }
+        .social a {
+            display: inline-block;
+            margin: 10px 15px;
+            padding: 12px 30px;
+            background: #6DF500;
+            color: #000;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+        .social a:hover {
+            background: white;
+            color: black;
+            transform: scale(1.05);
+        }
+        .payment-options {
+            background: #1e1e1e;
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 3px solid gold;
+            border-bottom: 3px solid gold;
+        }
+        .payment-options h4 {
+            font-size: 28px;
+            color: gold;
+            margin-bottom: 20px;
+        }
+        .payment-icons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            font-size: 2.5rem;
+            color: #fff;
+        }
+        .payment-icons i {
+            background: #333;
+            padding: 15px;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+        .payment-icons i:hover {
+            background: gold;
+            color: black;
+            transform: translateY(-5px);
+        }
+        .online-banking-trigger {
+            margin: 30px 0 15px;
+        }
+        .online-btn {
+            background: #0a7e8c;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 0 15px #00d4ff;
+            transition: 0.3s;
+        }
+        .online-btn:hover {
+            background: #0a5e68;
+            transform: scale(1.03);
+        }
+        .account-details {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 30px;
+            max-width: 500px;
+            margin: 20px auto;
+            border: 2px solid gold;
+            display: none;
+            font-size: 1.3rem;
+            line-height: 2rem;
+        }
+        .account-details p {
+            margin: 10px 0;
+        }
+        .account-details i {
+            color: gold;
+            width: 30px;
+        }
+        /* Receipt Upload Section */
+        .receipt-upload-area {
+            background: #2a2a2a;
+            border-radius: 30px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 1px solid gold;
+        }
+        .receipt-upload-area h5 {
+            color: gold;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        .receipt-file-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .receipt-file-wrapper input[type=file] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        .receipt-file-button {
+            background: #444;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 40px;
+            text-align: center;
+            border: 1px solid gold;
+            transition: 0.3s;
+        }
+        .receipt-file-button:hover {
+            background: #555;
+        }
+        .upload-receipt-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .upload-receipt-btn:hover {
+            background: #1e7e34;
+        }
+        .receipt-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .receipt-item {
+            background: #333;
+            padding: 10px 15px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .receipt-item a {
+            color: gold;
+            text-decoration: none;
+        }
+        .receipt-item button {
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+        /* Lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            text-align: center;
+            padding-top: 60px;
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 80%;
+            border: 3px solid gold;
+            border-radius: 10px;
+            object-fit: contain;
+        }
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: gold;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-lightbox:hover {
+            color: #fff;
+        }
+        .clickable-image {
+            cursor: pointer;
+        }
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        .review-card {
+            background: #2c2c2c;
+            padding: 25px;
+            border-radius: 30px;
+            border: 1px solid gold;
+        }
+        .review-card h4 {
+            font-size: 1.5rem;
+            color: gold;
+            margin-bottom: 8px;
+        }
+        .review-stars {
+            color: #FFD700;
+            font-size: 1.3rem;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
+        }
+        .review-text {
+            font-style: italic;
+            color: #ddd;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .review-date {
+            font-size: 0.8rem;
+            color: #888;
+            text-align: right;
+        }
+        .review-form {
+            background: #1f1f1f;
+            padding: 30px;
+            border-radius: 50px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: gold;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 40px;
+            border: none;
+            background: #333;
+            color: white;
+            font-size: 1rem;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            gap: 5px;
+        }
+        .star-rating input {
+            display: none;
+        }
+        .star-rating label {
+            font-size: 2.5rem;
+            color: #555;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input:checked ~ label {
+            color: gold;
+        }
+        .submit-review-btn {
+            background: gold;
+            color: black;
+            border: none;
+            padding: 14px 40px;
+            font-size: 1.3rem;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+        .submit-review-btn:hover {
+            background: #d4af37;
+        }
+        .support-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+        }
+        .support-float a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #25D366;
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            font-size: 2.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .support-float a:hover {
+            background: #128C7E;
+            transform: scale(1.1) rotate(5deg);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #111;
+            font-size: 14px;
+            color: #888;
+        }
+        #notification-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: gold;
+            color: black;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: none;
+        }
+        @media (max-width: 768px) {
+            header h1 { font-size: 40px; }
+            nav a { font-size: 14px; padding: 6px 10px; }
+            .hero h2 { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="notification-message"></div>
+
+<header>
+    <h1>VAULTAMAX</h1>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#products">Products</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+        <div class="cart-icon" id="cartIcon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </div>
+    </nav>
+    <div class="cart-dropdown" id="cartDropdown">
+        <h4 style="color:gold; margin-bottom:15px;">Your Cart</h4>
+        <div id="cartItemsList"></div>
+        <div class="cart-total" id="cartTotal">Total: $0</div>
+        <!-- WhatsApp Order Button -->
+        <button class="whatsapp-order-btn" id="whatsappOrderBtn" style="display:none;">
+            <i class="fab fa-whatsapp"></i> Order via WhatsApp
+        </button>
+    </div>
+</header>
+
+<section class="hero" id="hero">
+    <h2>We Sell <span id="switch-text">Premium Gadget & Phone Accessories</span></h2>
+</section>
+
+<section id="products" class="section">
+    <h3>🔥 Featured Products</h3>
+    <div class="products" id="productsContainer"></div>
+</section>
+
+<section id="gallery" class="section">
+    <h3>📸 More Products</h3>
+    <div class="gallery">
+        <img src="https://via.placeholder.com/300?text=Case+1" alt="Product 1" class="clickable-image">
+        src="https://via.placeholder.com/300?text=Case+2" alt="Product 2" class="clickable-image">  
+        <img src="https://via.placeholder.com/300?text=Charger" alt="Product 3" class="clickable-image">  
+        <img src="https://via.placeholder.com/300?text=Watch" alt="Product 4" class="clickable-image">  
+        <img src="/img/watc.png" alt="Product 5" width="300" height="300" class="clickable-image">  
+        <img src="https://via.placeholder.com/300?text=Powerbank" alt="Product 6" class="clickable-image">  
+    </div>  
+</section>  <section id="reviews" class="section">  
+    <h3>💬 Customer Reviews</h3>  
+    <div id="reviewsList" class="reviews-container"></div>  
+    <div class="review-form">  
+        <h4 style="color: gold; margin-bottom:20px;">Share Your Experience</h4>  
+        <div class="form-group">  
+            <label for="reviewerName">Your Name</label>  
+            <input type="text" id="reviewerName" placeholder="e.g., John Doe">  
+        </div>  
+        <div class="form-group">  
+            <label>Your Rating</label>  
+            <div class="star-rating">  
+                <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>  
+                <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>  
+                <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>  
+                <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>  
+                <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>  
+            </div>  
+        </div>  
+        <div class="form-group">  
+            <label for="reviewText">Your Review</label>  
+            <textarea id="reviewText" placeholder="Tell us what you think..."></textarea>  
+        </div>  
+        <button class="submit-review-btn" id="submitReviewBtn"><i class="fas fa-pen"></i> Submit Review</button>  
+    </div>  
+</section>  <section class="payment-options">  
+    <h4>💳 Secure Payment Options</h4>  
+    <div class="payment-icons">  
+        <i class="fab fa-cc-visa"></i>  
+        <i class="fab fa-cc-mastercard"></i>  
+        <i class="fab fa-cc-amex"></i>  
+        <i class="fab fa-cc-paypal"></i>  
+        <i class="fab fa-cc-apple-pay"></i>  
+        <i class="fab fa-google-pay"></i>  
+        <i class="fas fa-mobile-alt"></i>  
+    </div>  
+    <div class="online-banking-trigger">  
+        <button class="online-btn" id="showBankBtn"><i class="fas fa-university"></i> Online Banking (Opay)</button>  
+    </div>  
+    <div id="accountDetails" class="account-details">  
+        <p><i class="fas fa-bank"></i> <strong>Bank:</strong> Opay</p>  
+        <p><i class="fas fa-hashtag"></i> <strong>Account No:</strong> 9168514930</p>  
+        <p><i class="fas fa-user"></i> <strong>Name:</strong> Emeka Abel</p>  
+        <p style="font-size:1rem; color:#aaa;">Use this for direct bank transfer</p>  
+    </div>  <!-- Receipt Upload Section -->  
+<div class="receipt-upload-area">  
+    <h5>📎 Upload Payment Receipt</h5>  
+    <div class="receipt-file-wrapper">  
+        <button type="button" class="receipt-file-button" id="receiptUploadBtn">📁 Choose Receipt (image/PDF)</button>  
+        <input type="file" id="receiptFileInput" accept=".jpg,.jpeg,.png,.gif,.pdf">  
+    </div>  
+    <button class="upload-receipt-btn" id="saveReceiptBtn"><i class="fas fa-upload"></i> Upload Receipt</button>  
+    <div id="receiptList" class="receipt-list">  
+        <!-- Stored receipts will appear here -->  
+    </div>  
+</div>
+
+</section>  <section id="contact" class="social">  
+    <h3>📱 Follow VAULTAMAX</h3>  
+    <a href="https://instagram.com/abelinx3i" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>  
+    <a href="https://facebook.com/vaultamaxng" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>  
+    <a href="https://tiktok.com/@vaultamaxszn" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>  
+    <a href="https://wa.me/2349168514930" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>  
+</section>  <footer>  
+    © 2026 VAULTAMAX. All Rights Reserved.  
+</footer>  <div class="support-float">  
+    <a href="https://wa.me/2349168514930" target="_blank" title="Customer support">  
+        <i class="fab fa-whatsapp"></i>  
+    </a>  
+</div>  <!-- Lightbox -->  <div id="lightbox" class="lightbox">  
+    <span class="close-lightbox">&times;</span>  
+    <img class="lightbox-content" id="lightbox-img">  
+</div>  <script>  
+    (function() {  
+        // ---------- HELPER: show notification ----------  
+        function showNotification(message) {  
+            const notif = document.getElementById('notification-message');  
+            notif.style.display = 'block';  
+            notif.textContent = message;  
+            setTimeout(() => { notif.style.display = 'none'; }, 3000);  
+        }  
+  
+        // ---------- ROTATING TEXT ----------  
+        const phrases = [  
+            "Premium Gadget & Phone Accessories",  
+            "High Quality Phone Cases",  
+            "Smart Watches & Accessories",  
+            "Chargers & Power Banks",  
+            "Headphones & Earbuds"  
+        ];  
+        let i = 0;  
+        const heroSpan = document.getElementById("switch-text");  
+        if (heroSpan) {  
+            setInterval(() => {  
+                heroSpan.style.opacity = 0;  
+                setTimeout(() => {  
+                    heroSpan.textContent = phrases[i];  
+                    heroSpan.style.opacity = 1;  
+                    i = (i + 1) % phrases.length;  
+                }, 500);  
+            }, 2000);  
+        }  
+  
+        // ---------- DEFAULT PRODUCTS (fallback) ----------  
+        const defaultProducts = [  
+            { id:1, name:'Smart Watch Series', desc:'High quality smart accessories', price:89, rating:4.5, img:'img/ipchgr.jpg' },  
+            { id:2, name:'20W Power Bank', desc:'Fast charging, compact', price:39, rating:5, img:'img/50kp.jpg' },  
+            { id:3, name:'Wireless Earbuds', desc:'Deep bass, 30h battery', price:59, rating:3.8, img:'img/eyg1.jpg' },  
+            { id:4, name:'Phone Case', desc:'Shockproof, slim', price:19, rating:4.2, img:'img/piclght.jpg' }  
+        ];  
+  
+        // ---------- LOAD PRODUCTS FROM localStorage ----------  
+        function loadProducts() {  
+            const stored = localStorage.getItem('vaultamax_products');  
+            if (stored) {  
+                try {  
+                    return JSON.parse(stored);  
+                } catch (e) {  
+                    return defaultProducts;  
+                }  
+            } else {  
+                localStorage.setItem('vaultamax_products', JSON.stringify(defaultProducts));  
+                return defaultProducts;  
+            }  
+        }  
+  
+        let products = loadProducts();  
+  
+        // ---------- RENDER PRODUCTS (with clickable class) ----------  
+        const container = document.getElementById('productsContainer');  
+        function renderProducts() {  
+            let html = '';  
+            products.forEach(p => {  
+                const fullStars = Math.floor(p.rating);  
+                const halfStar = p.rating % 1 >= 0.5 ? '½' : '';  
+                const stars = '★'.repeat(fullStars) + (halfStar ? '★' : '') + '☆'.repeat(5 - fullStars - (halfStar?1:0));  
+                html += `  
+                    <div class="product-card">  
+                        <img src="${p.img}" alt="${p.name}" class="clickable-image">  
+                        <h4>${p.name}</h4>  
+                        <p>${p.desc || ''}</p>  
+                        <div class="rating">${stars} ${p.rating}</div>  
+                        <div class="product-price">$${p.price}</div>  
+                        <div>  
+                            <button class="btn buy-now" data-id="${p.id}">Buy Now</button>  
+                            <button class="view-btn add-to-cart" data-id="${p.id}"><i class="fas fa-cart-plus"></i> Add to Cart</button>  
+                        </div>  
+                    </div>  
+                `;  
+            });  
+            container.innerHTML = html;  
+        }  
+        renderProducts();  
+  
+        // ---------- CART SYSTEM ----------  
+        let cart = JSON.parse(localStorage.getItem('vaultamax_cart')) || [];  
+        const cartIcon = document.getElementById('cartIcon');  
+        const cartDropdown = document.getElementById('cartDropdown');  
+        const cartCount = document.getElementById('cartCount');  
+        const cartItemsDiv = document.getElementById('cartItemsList');  
+        const cartTotalDiv = document.getElementById('cartTotal');  
+        const whatsappBtn = document.getElementById('whatsappOrderBtn');  
+  
+        function updateCartUI() {  
+            const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);  
+            cartCount.textContent = totalItems;  
+  
+            if (cart.length === 0) {  
+                cartItemsDiv.innerHTML = '<div class="cart-empty">Your cart is empty</div>';  
+                cartTotalDiv.textContent = 'Total: $0';  
+                whatsappBtn.style.display = 'none';  
+                return;  
+            }  
+            let itemsHtml = '';  
+            let total = 0;  
+            cart.forEach(item => {  
+                const product = products.find(p => p.id === item.id);  
+                if (!product) return;  
+                total += product.price * item.quantity;  
+                itemsHtml += `  
+                    <div class="cart-item">  
+                        <img src="${product.img}" alt="${product.name}">  
+                        <div class="cart-item-info">  
+                            <div class="cart-item-title">${product.name}</div>  
+                            <div class="cart-item-price">$${product.price} x ${item.quantity}</div>  
+                        </div>  
+                        <button class="remove-item" style="background:red; border:none; color:white; border-radius:50%; width:30px; height:30px; cursor:pointer;" data-id="${item.id}"><i class="fas fa-times"></i></button>  
+                    </div>  
+                `;  
+            });  
+            cartItemsDiv.innerHTML = itemsHtml;  
+            cartTotalDiv.textContent = `Total: $${total.toFixed(2)}`;  
+            whatsappBtn.style.display = 'flex';  
+  
+            document.querySelectorAll('.remove-item').forEach(btn => {  
+                btn.addEventListener('click', (e) => {  
+                    e.stopPropagation();  
+                    const id = parseInt(btn.dataset.id);  
+                    cart = cart.filter(item => item.id !== id);  
+                    localStorage.setItem('vaultamax_cart', JSON.stringify(cart));  
+                    updateCartUI();  
+                });  
+            });  
+        }  
+  
+        function addToCart(id) {  
+            const existing = cart.find(item => item.id === id);  
+            if (existing) {  
+                existing.quantity += 1;  
+            } else {  
+                cart.push({ id, quantity: 1 });  
+            }  
+            localStorage.setItem('vaultamax_cart', JSON.stringify(cart));  
+            updateCartUI();  
+            cartDropdown.classList.add('show');  
+            setTimeout(() => cartDropdown.classList.remove('show'), 2000);  
+        }  
+  
+        // ---------- WHATSAPP ORDER ----------  
+        function sendWhatsAppOrder() {  
+            if (cart.length === 0) {  
+                showNotification('Your cart is empty!');  
+                return;  
+            }  
+            let message = '*Order from VAULTAMAX*%0A%0A';  
+            cart.forEach(item => {  
+                const product = products.find(p => p.id === item.id);  
+                if (product) {  
+                    message += `🔹 ${product.name} x${item.quantity} = $${(product.price * item.quantity).toFixed(2)}%0A`;  
+                }  
+            });  
+            const total = cart.reduce((acc, item) => {  
+                const p = products.find(p => p.id === item.id);  
+                return acc + (p ? p.price * item.quantity : 0);  
+            }, 0);  
+            message += `%0A*Total: $${total.toFixed(2)}*%0AThank you!`;  
+            const phone = '2349168514930';  
+            window.open(`https://wa.me/${phone}?text=${message}`, '_blank');  
+        }  
+  
+        whatsappBtn.addEventListener('click', sendWhatsAppOrder);  
+  
+        // ---------- EVENT LISTENER FOR BUTTONS ----------  
+        document.addEventListener('click', (e) => {  
+            const target = e.target.closest('button');  
+            if (!target) return;  
+  
+            const id = target.dataset.id;  
+            if (!id) return;  
+  
+            const product = products.find(p => p.id == id);  
+            if (!product) return;  
+  
+            if (target.classList.contains('buy-now')) {  
+                addToCart(parseInt(id));  
+                showNotification(`🔔 Buy Now: ${product.name} added to cart.`);  
+            } else if (target.classList.contains('add-to-cart')) {  
+                addToCart(parseInt(id));  
+            }  
+        });  
+  
+        cartIcon.addEventListener('click', (e) => {  
+            e.stopPropagation();  
+            cartDropdown.classList.toggle('show');  
+        });  
+  
+        document.addEventListener('click', (e) => {  
+            if (!cartIcon.contains(e.target) && !cartDropdown.contains(e.target)) {  
+                cartDropdown.classList.remove('show');  
+            }  
+        });  
+  
+        updateCartUI();  
+  
+        // ---------- PAYMENT / BANK TOGGLE ----------  
+        document.getElementById('showBankBtn').addEventListener('click', () => {  
+            const acc = document.getElementById('accountDetails');  
+            acc.style.display = (acc.style.display === 'block') ? 'none' : 'block';  
+        });  
+  
+        // ---------- RECEIPT UPLOAD STORAGE ----------  
+        let receipts = JSON.parse(localStorage.getItem('vaultamax_receipts')) || [];  
+  
+        const receiptFileInput = document.getElementById('receiptFileInput');  
+        const receiptUploadBtn = document.getElementById('receiptUploadBtn');  
+        const saveReceiptBtn = document.getElementById('saveReceiptBtn');  
+        const receiptListDiv = document.getElementById('receiptList');  
+  
+        receiptUploadBtn.addEventListener('click', () => {  
+            receiptFileInput.click();  
+        });  
+  
+        receiptFileInput.addEventListener('change', function(e) {  
+            if (this.files.length > 0) {  
+                receiptUploadBtn.textContent = `📁 ${this.files[0].name}`;  
+            } else {  
+                receiptUploadBtn.textContent = '📁 Choose Receipt (image/PDF)';  
+            }  
+        });  
+  
+        saveReceiptBtn.addEventListener('click', () => {  
+            const file = receiptFileInput.files[0];  
+            if (!file) {  
+                alert('Please select a file first.');  
+                return;  
+            }  
+            if (file.size > 1024 * 1024) {  
+                alert('File too large. Please choose under 1MB.');  
+                return;  
+            }  
+            const reader = new FileReader();  
+            reader.onload = function(event) {  
+                const dataURL = event.target.result;  
+                const newReceipt = {  
+                    id: Date.now(),  
+                    filename: file.name,  
+                    date: new Date().toLocaleString(),  
+                    data: dataURL  
+                };  
+                receipts.push(newReceipt);  
+                localStorage.setItem('vaultamax_receipts', JSON.stringify(receipts));  
+                renderReceipts();  
+                receiptFileInput.value = '';  
+                receiptUploadBtn.textContent = '📁 Choose Receipt (image/PDF)';  
+                showNotification('Receipt uploaded successfully!');  
+            };  
+            reader.readAsDataURL(file);  
+        });  
+  
+        function renderReceipts() {  
+            if (receipts.length === 0) {  
+                receiptListDiv.innerHTML = '<p style="color:#aaa;">No receipts uploaded yet.</p>';  
+                return;  
+            }  
+            let html = '';  
+            receipts.slice().reverse().forEach(r => {  
+                html += `  
+                    <div class="receipt-item">  
+                        <span>  
+                            <a href="${r.data}" target="_blank" download="${r.filename}">📎 ${r.filename}</a>  
+                            <br><small>${r.date}</small>  
+                        </span>  
+                        <button onclick="deleteReceipt(${r.id})" style="background:#ff4444; color:white; border:none; border-radius:50%; width:30px; height:30px;">✖</button>  
+                    </div>  
+                `;  
+            });  
+            receiptListDiv.innerHTML = html;  
+        }  
+  
+        window.deleteReceipt = function(id) {  
+            receipts = receipts.filter(r => r.id !== id);  
+            localStorage.setItem('vaultamax_receipts', JSON.stringify(receipts));  
+            renderReceipts();  
+        };  
+  
+        renderReceipts();  
+  
+        // ---------- REVIEWS ----------  
+        let reviews = JSON.parse(localStorage.getItem('vaultamax_reviews')) || [  
+            { name: 'Abel', rating: 5, text: 'Fast shipping and excellent quality!', date: '2/10/2025' },  
+            { name: 'Chioma', rating: 4, text: 'Love the power bank.', date: '2/15/2025' },  
+            { name: 'John', rating: 5, text: 'Customer support was super helpful.', date: '2/18/2025' }  
+        ];  
+  
+        function renderReviews() {  
+            const list = document.getElementById('reviewsList');  
+            if (!list) return;  
+            let html = '';  
+            reviews.slice().reverse().forEach(r => {  
+                const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);  
+                html += `  
+                    <div class="review-card">  
+                        <h4>${r.name}</h4>  
+                        <div class="review-stars">${stars}</div>  
+                        <div class="review-text">“${r.text}”</div>  
+                        <div class="review-date">${r.date}</div>  
+                    </div>  
+                `;  
+            });  
+            list.innerHTML = html || '<p style="text-align:center;">No reviews yet.</p>';  
+        }  
+        renderReviews();  
+  
+        document.getElementById('submitReviewBtn').addEventListener('click', (e) => {  
+            e.preventDefault();  
+            const name = document.getElementById('reviewerName').value.trim();  
+            const ratingInputs = document.getElementsByName('rating');  
+            let rating = 0;  
+            for (let r of ratingInputs) if (r.checked) rating = parseInt(r.value);  
+            const text = document.getElementById('reviewText').value.trim();  
+            if (!name || rating === 0 || !text) {  
+                alert('Please fill all fields and select a rating.');  
+                return;  
+            }  
+            const newReview = {  
+                name, rating, text,  
+                date: new Date().toLocaleDateString()  
+            };  
+            reviews.push(newReview);  
+            localStorage.setItem('vaultamax_reviews', JSON.stringify(reviews));  
+            renderReviews();  
+            document.getElementById('reviewerName').value = '';  
+            document.getElementById('reviewText').value = '';  
+            ratingInputs.forEach(r => r.checked = false);  
+        });  
+  
+        // ---------- LIGHTBOX ----------  
+        const lightbox = document.getElementById('lightbox');  
+        const lightboxImg = document.getElementById('lightbox-img');  
+        const closeLightbox = document.querySelector('.close-lightbox');  
+  
+document.addEventListener('click', function(e) {  
+            if (e.target.classList.contains('clickable-image')) {  
+                lightbox.style.display = 'block';  
+                lightboxImg.src = e.target.src;  
+            }  
+        });  
+  
+        closeLightbox.addEventListener('click', function() {  
+            lightbox.style.display = 'none';  
+        });  
+  
+        lightbox.addEventListener('click', function(e) {  
+            if (e.target === lightbox) {  
+                lightbox.style.display = 'none';  
+            }  
+        });  
+    })();  
+</script>  </body>  
+</html>
